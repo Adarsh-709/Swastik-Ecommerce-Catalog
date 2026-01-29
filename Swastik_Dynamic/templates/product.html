@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Product Details - Swastik Furnitures{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}">
+{% endblock %}
+
+<!-- Add a meta tag or hidden element to store the shop phone for JS -->
+{% block content %}
+    <div id="shop-data" data-phone="{{ shop_settings.phone|replace(' ', '')|replace('+', '') }}" style="display:none;"></div>
+    
+    <main>
+        <div id="product-details-container" class="product-details-container">
+            <p class="loading-text" style="grid-column: 1/-1; text-align: center;">Loading product details...</p>
+        </div>
+
+        <section id="related-products" class="related-products-section">
+            <h2 class="section-title">Related Products</h2>
+            <div class="related-products-grid" id="related-products-grid">
+                <!-- Related products injected here -->
+            </div>
+        </section>
+        
+        <!-- IMAGE ZOOM MODAL -->
+        <div id="image-modal" class="image-modal">
+            <span class="close-modal">&times;</span>
+            <div class="modal-content">
+                <img id="modal-image" src="" alt="Zoomed Product">
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/product.js') }}" type="module"></script>
+{% endblock %}

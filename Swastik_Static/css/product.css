@@ -1,0 +1,581 @@
+/* ... (Keep existing styles) ... */
+
+/* --- ADD TO CART BUTTON ANIMATION --- */
+.add-to-cart-btn {
+    background-color: var(--primary-color);
+    color: white;
+    overflow: hidden; 
+    position: relative;
+    border: none;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* 1. Animating State (Dark, Icons Moving) */
+.add-to-cart-btn.animating {
+    background-color: #333;
+    pointer-events: none;
+}
+
+.anim-cart-icon {
+    display: inline-block;
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 2;
+    /* Shake animation when item hits */
+    animation: cart-shake 1.2s ease forwards;
+}
+
+.anim-item-dot {
+    position: absolute;
+    top: -20px; /* Start above button */
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-color); /* Yellow item */
+    border-radius: 50%;
+    margin-left: -6px; /* Center horizontally */
+    z-index: 1; /* Behind cart front lip if we could, but here simple layering */
+    /* Drop animation */
+    animation: item-drop 1.2s ease forwards;
+}
+
+@keyframes item-drop {
+    0% { top: -20px; opacity: 1; transform: scale(1); }
+    30% { top: 35%; opacity: 1; transform: scale(1); } /* Fall fast */
+    40% { top: 45%; opacity: 0; transform: scale(0.5); } /* Disappear into cart */
+    100% { top: 45%; opacity: 0; transform: scale(0); }
+}
+
+@keyframes cart-shake {
+    0% { transform: scale(1) rotate(0); }
+    30% { transform: scale(1) rotate(0); } /* Wait for item */
+    35% { transform: scale(1.1) rotate(-10deg); } /* Catch item impact */
+    40% { transform: scale(1.1) rotate(10deg); }
+    45% { transform: scale(1) rotate(0); }
+    /* Slide out effect to the right */
+    80% { transform: scale(1) translateX(0); opacity: 1; }
+    100% { transform: scale(1) translateX(10px); opacity: 0; } 
+}
+
+/* 2. Added State (Green Success) */
+.add-to-cart-btn.added {
+    background-color: #4CAF50 !important;
+    animation: success-pop 0.3s ease-out;
+}
+
+@keyframes success-pop {
+    0% { transform: scale(0.95); opacity: 0; }
+    50% { transform: scale(1.02); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ... (Keep existing styles for gallery, responsive grid, etc.) ... */
+/* --- PRODUCT DETAILS CONTAINER --- */
+.product-details-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 500px;
+}
+
+/* Info Section */
+.product-info h1 {
+    font-family: var(--font-family-headings);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+    line-height: 1.2;
+}
+
+/* --- PROFESSIONAL PRICING STYLES --- */
+.price-container {
+    margin-bottom: 1.5rem;
+}
+
+.price-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mrp-label {
+    font-size: 0.95rem;
+    color: #565959;
+}
+
+.mrp-label .original-price {
+    text-decoration: line-through;
+    color: #565959;
+}
+
+.deal-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.deal-label {
+    color: #CC0C39; /* Amazon Deal Red */
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.current-price {
+    font-size: 1.75rem;
+    color: #333;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.save-badge {
+    color: #CC0C39;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.inclusive-tax {
+    font-size: 0.85rem;
+    color: #565959;
+    margin-top: 2px;
+}
+
+.description {
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* Specs Box Refresh */
+.specs-box {
+    background: #fff;
+    border: none;
+    border-top: 1px solid #eee;
+    padding: 1rem 0;
+    margin-bottom: 1.5rem;
+    display: table;
+    width: 100%;
+}
+
+.spec-row {
+    display: flex;
+    padding: 8px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.spec-label {
+    flex: 0 0 120px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.spec-value {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden; 
+}
+
+.btn-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Order Button */
+.order-button {
+    background-color: #25D366; 
+    color: white;
+}
+.order-button:hover {
+    background-color: #1ebe57;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+}
+
+/* --- PRODUCT GALLERY SLIDER --- */
+.product-gallery {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.product-slider-container {
+    position: relative;
+    width: 100%;
+    height: 450px; 
+    background-color: #fff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.product-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    animation: fadeEffect 0.4s;
+}
+
+.product-slide.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0.6} 
+    to {opacity: 1}
+}
+
+.product-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: zoom-in;
+    transition: transform 0.3s;
+}
+
+.p-prev, .p-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    user-select: none;
+    background-color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.1);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    backdrop-filter: blur(2px);
+}
+
+.p-prev { left: 15px; }
+.p-next { right: 15px; }
+
+.p-prev:hover, .p-next:hover {
+    background-color: rgba(255,255,255,1);
+    color: var(--accent-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.product-dots {
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.p-dot {
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
+    background-color: #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.p-dot.active, .p-dot:hover {
+    background-color: #333;
+    transform: scale(1.2);
+}
+
+/* --- RELATED PRODUCTS SECTION (DYNAMIC GRID) --- */
+.related-products-section {
+    padding: 4rem 2rem;
+    background-color: #fcfcfc;
+    border-top: 1px solid #eee;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+/* Base Grid Logic */
+.category-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Desktop Grid Rules */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Cols */
+    gap: 1.5rem;
+}
+
+/* Desktop Overflow (Slidable 3 rows) */
+.category-grid.desktop-overflow {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column; /* Horizontal */
+    grid-auto-columns: calc(33.333% - 1rem); /* 3 cols width */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+}
+
+/* --- PRODUCT CARD MINI STYLING --- */
+.product-card-mini {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    scroll-snap-align: start;
+    height: 100%;
+    position: relative; /* For badge positioning */
+}
+
+.product-card-mini:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.mini-img-wrapper {
+    width: 100%;
+    height: 200px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: relative;
+}
+
+.mini-discount-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #e53935; /* Red */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.mini-img-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.mini-info {
+    padding: 15px;
+    border-top: 1px solid #f5f5f5;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.mini-info h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Mini Price Styling */
+.mini-price-container {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: auto;
+    flex-wrap: wrap;
+}
+
+.mini-info .price {
+    color: var(--accent-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.mini-info .original-price {
+    font-size: 0.9rem;
+    color: #999;
+    text-decoration: line-through;
+    font-weight: 400;
+}
+
+/* --- ZOOM MODAL --- */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+    animation: zoom 0.6s;
+    cursor: zoom-in;
+}
+
+.modal-content.zoomed {
+    max-width: none;
+    max-height: none;
+    cursor: zoom-out;
+    transform: scale(1.5);
+    transition: transform 0.3s ease;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.close-modal:hover {
+    color: var(--accent-color);
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 1023px) {
+    .related-products-section { padding: 3rem 1rem; }
+
+    /* Count 1: Big Card */
+    .category-grid.count-1 { grid-template-columns: 1fr; }
+
+    /* Count 2: 2 Columns */
+    .category-grid.count-2 { grid-template-columns: 1fr 1fr; }
+
+    /* Count 3: Horizontal Slide */
+    .category-grid.count-3 {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding-bottom: 10px;
+    }
+    .category-grid.count-3 .product-card-mini {
+        min-width: 45%; 
+        flex: 0 0 auto;
+    }
+
+    /* Count 4: 2 Rows 2 Cols */
+    .category-grid.count-4 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Count > 4: 2 Rows, 2 Cols Visible, then Slidable */
+    .category-grid.count-plus {
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+        grid-auto-flow: column;
+        grid-auto-columns: calc(50% - 0.75rem);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding-bottom: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-details-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1.5rem;
+    }
+    .product-slider-container { height: 350px; }
+    .p-prev, .p-next { display: none; } /* Hide slider arrows on mobile */
+    
+    .modal-content {
+        width: 100%;
+        max-width: 95%;
+        max-height: 80vh;
+    }
+    .trust-badges {
+        justify-content: space-evenly;
+    }
+    
+    .mini-img-wrapper { height: 150px; }
+}

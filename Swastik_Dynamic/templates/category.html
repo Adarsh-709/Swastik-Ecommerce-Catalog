@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Products - Swastik Furnitures{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}">
+{% endblock %}
+
+{% block content %}
+    <section class="category-hero">
+        <h1 id="category-title">All Products</h1>
+    </section>
+
+    <!-- Sorting and Filtering Toolbar -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-group">
+                <label for="category-select">Category:</label>
+                <select id="category-select">
+                    <option value="">All Products</option>
+                    <option value="sofas">Sofas</option>
+                    <option value="chairs">Chairs</option>
+                    <option value="tables">Tables</option>
+                    <option value="beds">Beds</option>
+                    <option value="storage">Storage</option>
+                    <option value="tv-panels">TV Panels</option>
+                    <option value="kitchen">Kitchen Items</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="sort-select">Sort By:</label>
+                <select id="sort-select">
+                    <option value="default">Default</option>
+                    <option value="price_asc">Price: Low to High</option>
+                    <option value="price_desc">Price: High to Low</option>
+                    <option value="name_asc">Name: A-Z</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-grid-container">
+        <div class="product-grid" id="product-grid">
+            <p class="loading-text" style="grid-column: 1/-1; text-align: center;">Loading products...</p>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/category.js') }}" type="module"></script>
+{% endblock %}

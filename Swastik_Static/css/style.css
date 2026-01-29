@@ -1,0 +1,484 @@
+/* ========================================= */
+/* GLOBAL VARIABLES & RESET                  */
+/* ========================================= */
+:root {
+    --primary-color: #333;
+    --secondary-color: #fff;
+    --accent-color: #f4b400; /* Original Yellow */
+    --light-gray-color: #f5f5f5;
+    --text-color: #444;
+    --footer-bg: #222;
+    --footer-text: #eee;
+    --font-family-headings: 'Poppins', sans-serif;
+    --font-family-body: 'Roboto', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-family-body); color: var(--text-color); background-color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
+main { flex: 1; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ========================================= */
+/* HEADER & NAVIGATION                       */
+/* ========================================= */
+header {
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 80px;
+}
+
+/* Logo */
+.logo a { display: flex; align-items: center; gap: 10px; color: var(--primary-color); }
+.logo img { height: 40px; width: auto; }
+.logo span { font-family: var(--font-family-headings); font-size: 1.5rem; font-weight: 700; color: #333; }
+
+/* Search Bar (Desktop) */
+.search-bar { flex-grow: 1; margin: 0 3rem; max-width: 500px; position: relative; }
+.search-bar form { display: flex; width: 100%; border: 1px solid #ddd; border-radius: 25px; overflow: hidden; background-color: #f5f5f5; }
+.search-bar input { border: none; padding: 10px 20px; width: 100%; background: transparent; font-size: 1rem; color: #333; font-family: inherit; }
+.search-bar input:focus { outline: none; background: #fff; }
+.search-bar button { border: none; background-color: var(--accent-color); color: #333; padding: 0 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+.search-bar button:hover { background-color: #e0a800; }
+
+/* Nav Links */
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links li { position: relative; }
+.nav-links a { color: var(--primary-color); font-weight: 500; font-size: 1rem; transition: color 0.3s ease; display: flex; align-items: center; gap: 5px; }
+.nav-links a:hover { color: var(--accent-color); }
+.nav-links i { font-size: 1.2rem; }
+
+/* Cart Badge */
+.cart-badge {
+    background: #e91e63;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    position: relative;
+    top: -2px;
+    margin-left: 2px;
+}
+
+/* Dropdown Menu */
+.dropdown { position: relative; height: 100%; display: flex; align-items: center; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    z-index: 1000;
+    border-radius: 8px;
+    padding: 10px 0;
+    margin-top: 15px; /* Spacing from nav item */
+}
+.dropdown-content::before {
+    content: ''; position: absolute; top: -6px; left: 50%; margin-left: -6px;
+    width: 12px; height: 12px; background: #fff; transform: rotate(45deg);
+    box-shadow: -2px -2px 5px rgba(0,0,0,0.05);
+}
+.dropdown-content a { color: #333; padding: 12px 20px; display: block; font-size: 0.95rem; text-align: left; }
+.dropdown-content a:hover { background-color: #f5f5f5; color: var(--accent-color); }
+.dropdown:hover .dropdown-content { display: block; animation: fadeInUp 0.2s ease; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* Mobile Utilities */
+.hamburger, #search-icon { display: none; cursor: pointer; color: #333; font-size: 1.5rem; }
+.search-container { display: none; padding: 1rem 2rem; background-color: var(--secondary-color); border-top: 1px solid #eee; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.search-container input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; }
+.search-container.active { display: block; }
+
+/* ========================================= */
+/* FOOTER                                    */
+/* ========================================= */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 4rem 2rem 1rem;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+/* Footer Headings */
+.footer-column h3 {
+    font-family: var(--font-family-headings);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+.footer-column h3::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 40px; height: 3px; background-color: var(--accent-color);
+}
+
+/* Footer Links & Text */
+.footer-about p { line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.8; font-size: 0.95rem; }
+.footer-links ul { padding: 0; }
+.footer-links li { margin-bottom: 0.8rem; }
+.footer-links a { color: #ccc; transition: 0.3s; }
+.footer-links a:hover { color: var(--accent-color); padding-left: 5px; }
+
+/* Footer Contact Icons */
+.footer-contact p { display: flex; align-items: center; margin-bottom: 1rem; color: #ccc; }
+.footer-contact i { color: var(--accent-color); margin-right: 12px; font-size: 1.2rem; }
+
+/* Get Directions Button */
+.get-directions-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: #222;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+.get-directions-btn:hover { background-color: #e0a800; color: #000; }
+
+/* Social Links */
+.social-links { display: flex; gap: 15px; }
+.social-links a {
+    background-color: rgba(255,255,255,0.1);
+    color: #fff;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s, transform 0.3s;
+}
+.social-links a:hover { background-color: var(--accent-color); color: #222; transform: translateY(-3px); }
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* ========================================= */
+/* GLOBAL COMPONENTS                         */
+/* ========================================= */
+.cta-button {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+.cta-button:hover { background-color: #e0a800; }
+
+.whatsapp-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #25D366;
+    color: white;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    z-index: 2000;
+}
+.whatsapp-fab:hover { transform: scale(1.1); }
+
+/* Floating Cart Button (New) */
+.floating-cart-btn {
+    position: fixed;
+    bottom: 95px; /* Positioned above WhatsApp button (25px bottom + 60px height + 10px gap) */
+    right: 30px; /* Slightly aligned center with WA button which is right:25px + width diff */
+    background-color: #fff;
+    color: #333;
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-decoration: none;
+    z-index: 1999; /* Just below WA button z-index */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid var(--accent-color);
+}
+
+.floating-cart-btn i {
+    font-size: 24px;
+    color: #333;
+}
+
+.floating-cart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+/* Floating Cart Badge */
+.float-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #e91e63;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+}
+
+/* Pop Animation for update */
+.floating-cart-btn.pop {
+    transform: scale(1.2);
+}
+
+/* ========================================= */
+/* RESPONSIVE DESIGN                         */
+/* ========================================= */
+@media (max-width: 900px) {
+    nav { height: 70px; padding: 0.5rem 1rem; }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%; left: 0; right: 0;
+        background-color: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 2rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        gap: 0;
+        z-index: 999; /* Ensure menu stays above other content */
+    }
+    
+    .nav-links.active { display: flex; }
+    
+    .nav-links li { width: 100%; border-bottom: 1px solid #eee; }
+    .nav-links li:last-child { border-bottom: none; }
+    
+    .nav-links a {
+        padding: 15px 0;
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    /* Mobile Dropdown adjustment */
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border-left: 2px solid var(--accent-color);
+        margin-top: 0;
+        padding-left: 15px;
+        transform: none;
+        display: none; 
+        width: 100%;
+    }
+    .dropdown:hover .dropdown-content { display: block; animation: none; }
+    
+    .search-bar { display: none; }
+    .hamburger, #search-icon { display: block; margin-left: 1rem; }
+    
+    .logo span { font-size: 1.2rem; }
+
+    /* --- MOBILE SEARCH CONTAINER IMPROVEMENTS --- */
+    .search-container {
+        display: none;
+        padding: 15px;
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        position: absolute; /* Overlay instead of pushing content */
+        top: 70px; /* Below nav */
+        left: 0;
+        right: 0;
+        z-index: 998;
+        animation: slideDown 0.2s ease-out;
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(-10px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .search-container.active { display: block; }
+
+    .search-container form {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background-color: #f5f5f5;
+        border-radius: 25px; /* Fully rounded pill shape */
+        padding: 5px 15px;
+        border: 1px solid transparent;
+        transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    .search-container form:focus-within {
+        background-color: #fff;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(244, 180, 0, 0.1);
+    }
+
+    .search-container input {
+        border: none;
+        background: transparent;
+        padding: 10px;
+        font-size: 1rem;
+        flex-grow: 1;
+        width: 100%; /* Ensure input takes full width */
+        outline: none; /* Remove default focus outline */
+        border-radius: 0; /* Reset border radius */
+    }
+
+    /* Override input border from previous declaration if any */
+    .search-container input:focus {
+        border: none;
+        outline: none;
+    }
+
+    /* Mobile Search Button (Optional: Icon inside input) */
+    /* If your HTML structure for mobile search is just form > input, we might not have a button. 
+       Assuming the structure is form > input based on common.js logic which expects input submit via Enter 
+       or if there is a button, style it. */
+    
+    /* If there is a submit button in mobile form */
+    .search-container button {
+        background: none;
+        border: none;
+        color: #666;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+    .footer-column h3::after { left: 50%; transform: translateX(-50%); }
+    .social-links { justify-content: center; }
+    .footer-contact p { justify-content: center; }
+    
+    .whatsapp-fab {
+        width: 50px; height: 50px; font-size: 28px;
+        bottom: 20px; right: 20px;
+    }
+    .floating-cart-btn {
+        width: 45px; height: 45px;
+        bottom: 80px; right: 22.5px; 
+    }
+    .floating-cart-btn i { font-size: 20px; }
+}
+
+/* Search Bar (Desktop) */
+.search-bar { flex-grow: 1; margin: 0 3rem; max-width: 500px; position: relative; }
+.search-bar form { display: flex; width: 100%; border: 1px solid #ddd; border-radius: 25px; overflow: visible; background-color: #f5f5f5; position: relative; } /* Overflow visible for suggestions */
+.search-bar input { border: none; padding: 10px 20px; width: 100%; background: transparent; font-size: 1rem; color: #333; font-family: inherit; }
+.search-bar input:focus { outline: none; background: #fff; }
+.search-bar button { border: none; background-color: var(--accent-color); color: #333; padding: 0 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.3s; border-radius: 0 25px 25px 0; }
+.search-bar button:hover { background-color: #e0a800; }
+
+/* SEARCH SUGGESTIONS DROPDOWN */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1001;
+    display: none;
+    overflow: hidden;
+    margin-top: 2px;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.suggestion-item:last-child { border-bottom: none; }
+.suggestion-item:hover { background-color: #f9f9f9; }
+
+.suggestion-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.suggestion-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.suggestion-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+.suggestion-price {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.no-suggestions {
+    padding: 10px 15px;
+    color: #666;
+    font-size: 0.9rem;
+    text-align: center;
+}

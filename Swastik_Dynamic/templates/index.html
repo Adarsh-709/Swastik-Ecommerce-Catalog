@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Swastik Furnitures - Home{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+{% block content %}
+    <!-- HERO CAROUSEL SECTION -->
+    <section class="hero-carousel">
+        <div class="carousel-container">
+            <!-- Slide 1 -->
+            <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop');">
+                <div class="hero-content">
+                    <h1>Modern Furniture for Your Home</h1>
+                    <p>Discover our new collection of modern and minimalist furniture.</p>
+                    <a href="{{ url_for('category_page') }}" class="cta-button">Shop Now</a>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop');">
+                <div class="hero-content">
+                    <h1>Customize Your Furniture</h1>
+                    <p>We Customize Furniture to match your exact needs.</p>
+                    <a href="{{ url_for('category_page') }}" class="cta-button">Order Now</a>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop');">
+                <div class="hero-content">
+                    <h1>Elegant Dining Sets</h1>
+                    <p>Perfect for family gatherings and special occasions.</p>
+                    <a href="{{ url_for('category_page', category='tables') }}" class="cta-button">Explore Tables</a>
+                </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070&auto=format&fit=crop');">
+                <div class="hero-content">
+                    <h1>Luxury Bedroom Collection</h1>
+                    <p>Transform your bedroom into a sanctuary of comfort.</p>
+                    <a href="{{ url_for('category_page', category='beds') }}" class="cta-button">View Beds</a>
+                </div>
+            </div>
+        </div>
+        
+        <button class="carousel-btn prev" aria-label="Previous Slide">&#10094;</button>
+        <button class="carousel-btn next" aria-label="Next Slide">&#10095;</button>
+        
+        <div class="carousel-indicators">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+            <span class="dot" data-slide="3"></span>
+        </div>
+    </section>
+
+    <!-- CATEGORIES SECTION -->
+    <section id="categories" class="category-section">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-grid">
+            <a href="{{ url_for('category_page', category='sofas') }}" class="category-card">
+                <img src="https://images.unsplash.com/photo-1540574163024-5884b2b504d3?q=80&w=2070&auto=format&fit=crop" alt="Sofas">
+                <h3>Sofas</h3>
+            </a>
+            <a href="{{ url_for('category_page', category='chairs') }}" class="category-card">
+                <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?q=80&w=1964&auto=format&fit=crop" alt="Chairs">
+                <h3>Chairs</h3>
+            </a>
+            <a href="{{ url_for('category_page', category='tables') }}" class="category-card">
+                <img src="https://images.unsplash.com/photo-1554228383-a113f98c8e4c?q=80&w=2070&auto=format&fit=crop" alt="Tables">
+                <h3>Tables</h3>
+            </a>
+            <a href="{{ url_for('category_page', category='beds') }}" class="category-card">
+                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070&auto=format&fit=crop" alt="Beds">
+                <h3>Beds</h3>
+            </a>
+            <a href="{{ url_for('category_page', category='storage') }}" class="category-card">
+                <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1974&auto=format&fit=crop" alt="Storage">
+                <h3>Storage</h3>
+            </a>
+            <a href="{{ url_for('category_page', category='tv-panels') }}" class="category-card">
+                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1974&auto=format&fit=crop" alt="TV Panels">
+                <h3>TV Panels</h3>
+            </a>
+            <a href="{{ url_for('category_page', category='kitchen') }}" class="category-card">
+                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=2070&auto=format&fit=crop" alt="Kitchen Items">
+                <h3>Kitchen Items</h3>
+            </a>
+        </div>
+    </section>
+
+    <!-- UPDATED BESTSELLERS SECTION -->
+    <section id="bestsellers" class="bestsellers-section">
+        <!-- New Header Wrapper -->
+        <div class="section-header">
+            <h2 class="section-title">Our Best Sellers</h2>
+            <!-- Pass 'type=bestsellers' to the category page -->
+            <a href="{{ url_for('category_page', type='bestsellers') }}" class="view-all-btn">View All</a>
+        </div>
+        
+        <div class="bestsellers-container">
+            <button class="slider-btn prev-btn" aria-label="Previous Slide"><i class="material-icons">chevron_left</i></button>
+            <div class="bestsellers-grid">
+                <p style="text-align:center; width:100%; color:#666;" class="loading-text">Loading bestsellers...</p>
+            </div>
+            <button class="slider-btn next-btn" aria-label="Next Slide"><i class="material-icons">chevron_right</i></button>
+        </div>
+    </section>
+
+    <section id="why-us" class="why-us-section">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <div class="why-us-grid">
+            <div class="why-us-card">
+                <i class="material-icons">local_shipping</i>
+                <h3>Safe & Fast Delivery</h3>
+                <p>We provide safe and fast delivery service all over West Bengal and Sikkim.</p>
+            </div>
+            <div class="why-us-card">
+                <i class="material-icons">create</i>
+                <h3>Customized Furniture</h3>
+                <p>We take orders for customized furnitures to match your exact needs.</p>
+            </div>
+            <div class="why-us-card">
+                <i class="material-icons">store</i>
+                <h3>Factory to Customer</h3>
+                <p>Direct from factory to your doorstep, ensuring the best prices.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/bestseller-card.js') }}" type="module"></script>
+    <script src="{{ url_for('static', filename='js/home.js') }}" type="module"></script>
+{% endblock %}

@@ -1,0 +1,24 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ---- Virtual Environment ----
+.venv/
+venv/
+env/
+Swastik_Dynamic/.venv/
+
+# ---- Environment Variables ----
+.env
+
+# ---- Firebase Service Account Keys ----
+Swastik_Dynamic/swastik-furniture-firebase-adminsdk-*.json
+
+# ---- OS Files ----
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log

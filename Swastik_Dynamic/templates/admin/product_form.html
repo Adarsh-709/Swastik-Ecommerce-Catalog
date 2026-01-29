@@ -1,0 +1,192 @@
+{% extends "admin/base_admin.html" %}
+
+{% block content %}
+    <div style="max-width: 850px; margin: 0 auto;">
+        <div class="header-actions" style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary" style="padding: 8px 12px;">
+                <i class="material-icons-round">arrow_back</i>
+            </a>
+            <h2 style="margin: 0;">{% if product %}Edit Product{% else %}Add New Product{% endif %}</h2>
+        </div>
+        
+        <div class="card">
+            <form method="POST" enctype="multipart/form-data">
+                <!-- Basic Info -->
+                <div class="form-section-title">Basic Information</div>
+                <div class="form-row">
+                    <div>
+                        <label>Product Name <span style="color:red">*</span></label>
+                        <input type="text" name="name" value="{{ product.name if product else '' }}" required placeholder="e.g. Royal Oak Sofa">
+                    </div>
+                    <div>
+                        <label>Category <span style="color:red">*</span></label>
+                        <select name="category" required>
+                            <option value="" disabled {% if not product %}selected{% endif %}>Select Category</option>
+                            <option value="sofas" {% if product and product.category == 'sofas' %}selected{% endif %}>Sofas</option>
+                            <option value="beds" {% if product and product.category == 'beds' %}selected{% endif %}>Beds</option>
+                            <option value="tables" {% if product and product.category == 'tables' %}selected{% endif %}>Tables</option>
+                            <option value="chairs" {% if product and product.category == 'chairs' %}selected{% endif %}>Chairs</option>
+                            <option value="storage" {% if product and product.category == 'storage' %}selected{% endif %}>Storage</option>
+                            <option value="tv-panels" {% if product and product.category == 'tv-panels' %}selected{% endif %}>TV Panels</option>
+                            <option value="kitchen" {% if product and product.category == 'kitchen' %}selected{% endif %}>Kitchen</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pricing -->
+                <div class="form-section-title">Pricing</div>
+                <div class="form-row">
+                    <div>
+                        <label>Selling Price <span style="color:red">*</span></label>
+                        <input type="text" name="price" value="{{ product.price if product else '' }}" required placeholder="e.g. ₹25,000">
+                    </div>
+                    <div>
+                        <label>Original Price <small class="text-muted">(Optional)</small></label>
+                        <input type="text" name="original_price" value="{{ product.original_price if product else '' }}" placeholder="e.g. ₹30,000">
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="form-section-title">Product Image</div>
+                <div class="image-upload-container">
+                    <div class="preview-box" id="imagePreview">
+                        {% if product and product.image %}
+                            <img src="{{ product.image }}" alt="Preview">
+                        {% else %}
+                            <div class="placeholder">
+                                <i class="material-icons-round">image</i>
+                                <span>No Image</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="upload-options">
+                        <div class="file-input-wrapper">
+                            <!-- Changed label style to display: block to prevent overflow -->
+                            <label class="btn btn-secondary upload-btn">
+                                <i class="material-icons-round">cloud_upload</i> Upload New File
+                                <input type="file" name="image_file" accept="image/*" onchange="previewFile(this)" hidden>
+                            </label>
+                        </div>
+                        <div style="text-align: center; color: #aaa; font-size: 0.8rem; margin: 10px 0;">OR</div>
+                        <input type="text" name="image_url" id="imageUrlInput" value="{{ product.image if product else '' }}" placeholder="Paste Image URL" oninput="previewUrl(this.value)">
+                    </div>
+                </div>
+
+                <!-- Details -->
+                <div class="form-section-title">Details</div>
+                <label>Description</label>
+                <textarea name="description" rows="4" placeholder="Describe the product features...">{{ product.description if product else '' }}</textarea>
+
+                <div class="form-row" style="margin-top: 15px;">
+                    <div>
+                        <label>Dimensions</label>
+                        <input type="text" name="dimensions" value="{{ product.dimensions if product else '' }}" placeholder="e.g. 6ft x 4ft">
+                    </div>
+                    <div>
+                        <label>Material</label>
+                        <input type="text" name="material" value="{{ product.material if product else '' }}" placeholder="e.g. Teak Wood">
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="form-section-title">Status & Visibility</div>
+                <div class="status-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="available" {% if not product or product.get('available', True) %}checked{% endif %}>
+                        <span class="checkmark"></span>
+                        <div>
+                            <span class="cb-title">Available (In Stock)</span>
+                            <span class="cb-desc">Uncheck to mark as "Out of Stock"</span>
+                        </div>
+                    </label>
+
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="bestseller" {% if product and product.bestseller %}checked{% endif %}>
+                        <span class="checkmark"></span>
+                        <div>
+                            <span class="cb-title">Mark as Bestseller</span>
+                            <span class="cb-desc">Show in the "Best Sellers" section on homepage</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-footer">
+                    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary" style="padding: 12px 30px;">
+                        <i class="material-icons-round">save</i> Save Product
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .form-section-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 700; margin: 25px 0 15px; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+        .form-section-title:first-child { margin-top: 0; }
+        
+        /* Updated Image Upload Styles to fix overflow */
+        .image-upload-container { 
+            display: flex; 
+            gap: 20px; 
+            align-items: center; 
+            background: #f8f9fa; 
+            padding: 20px; 
+            border-radius: 8px; 
+            border: 1px dashed #ced4da;
+            flex-wrap: wrap; /* Allows wrapping on very small screens */
+        }
+        
+        .preview-box { width: 120px; height: 120px; border-radius: 8px; overflow: hidden; background: white; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .preview-box img { width: 100%; height: 100%; object-fit: cover; }
+        .preview-box .placeholder { display: flex; flex-direction: column; align-items: center; color: #adb5bd; font-size: 0.8rem; }
+        
+        .upload-options { flex-grow: 1; min-width: 200px; /* Ensure input doesn't get too small */ }
+        
+        .upload-btn {
+            width: 93%;
+            text-align: center;
+            justify-content: center;
+            display: flex; /* Helps center content */
+            white-space: nowrap; /* Keeps text on one line if possible */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Handle overflow gracefully */
+        }
+
+        .status-options { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .checkbox-container { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid transparent; transition: all 0.2s; }
+        .checkbox-container:hover { border-color: var(--primary); background: #fff; }
+        .checkbox-container input { display: none; }
+        .checkmark { width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 4px; position: relative; flex-shrink: 0; margin-top: 2px; }
+        .checkbox-container input:checked ~ .checkmark { background: var(--primary); border-color: var(--primary); }
+        .checkbox-container input:checked ~ .checkmark::after { content: '✓'; color: white; position: absolute; left: 3px; top: -1px; font-size: 14px; font-weight: bold; }
+        .cb-title { display: block; font-weight: 600; color: var(--text-main); }
+        .cb-desc { display: block; font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
+
+        .form-footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 15px; }
+
+        @media (max-width: 600px) {
+            .image-upload-container { flex-direction: column; align-items: stretch; }
+            .preview-box { width: 100%; height: 200px; margin-bottom: 15px; }
+            .status-options { grid-template-columns: 1fr; }
+            .upload-btn {width: 83%;}
+        }
+    </style>
+
+    <script>
+        function previewFile(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').innerHTML = `<img src="${e.target.result}">`;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+        function previewUrl(url) {
+            if (url && url.length > 10) {
+                document.getElementById('imagePreview').innerHTML = `<img src="${url}" onerror="this.parentElement.innerHTML='<div class=\'placeholder\'><span>Invalid URL</span></div>'">`;
+            }
+        }
+    </script>
+{% endblock %}

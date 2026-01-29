@@ -1,0 +1,28 @@
+.search-results-section {
+    padding: 40px 20px;
+    text-align: center;
+    min-height: 60vh; /* Ensure footer stays down if few results */
+}
+
+#search-results-title {
+    font-family: var(--font-family-headings, 'Poppins', sans-serif);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#search-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loading-text {
+    font-size: 1.2rem;
+    color: #666;
+    grid-column: 1 / -1;
+}

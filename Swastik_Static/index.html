@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swastik Furnitures - Home</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <!-- HEADER STRUCTURE -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img id ="shopLogo" style="font-size: 1.8rem;" src="" alt="Logo">
+                    <span id="shopName" class="shop-name-text"></span>
+                </a>
+            </div>
+
+            <!-- Desktop Search -->
+            <div class="search-bar">
+                <form onsubmit="handleSearch(event)">
+                    <input type="text" placeholder="Search for products..." autocomplete="off">
+                    <button type="submit"><i class="material-icons">search</i></button>
+                </form>
+            </div>
+
+            <!-- Navigation -->
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="products.html" class="dropbtn">Products <i class="material-icons" style="font-size:1rem; margin-left:2px;">arrow_drop_down</i></a>
+                    <div class="dropdown-content">
+                        <a href="products.html?category=sofas">Sofas</a>
+                        <a href="products.html?category=beds">Beds</a>
+                        <a href="products.html?category=tables">Tables</a>
+                        <a href="products.html?category=chairs">Chairs</a>
+                        <a href="products.html?category=storage">Storage</a>
+                        <a href="products.html?category=tv-panels">TV Panels</a>
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li>
+                    <a href="cart.html">
+                        Cart <i class="material-icons" style="font-size:1.2rem;">shopping_bag</i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Mobile Icons -->
+            <div id="search-icon"><i class="material-icons">search</i></div>
+            <div class="hamburger"><i class="material-icons">menu</i></div>
+        </nav>
+        
+        <!-- Mobile Search Container -->
+        <div class="search-container">
+            <form onsubmit="handleSearch(event)">
+                <input type="text" placeholder="Search..." autocomplete="off">
+            </form>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO CAROUSEL SECTION -->
+        <section class="hero-carousel">
+            <div class="carousel-container">
+                <!-- Slide 1 -->
+                <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=2070&auto=format&fit=crop');">
+                    <div class="hero-content">
+                        <h1>Modern Furniture for Your Home</h1>
+                        <p>Discover our new collection of modern and minimalist furniture.</p>
+                        <a href="products.html" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop');">
+                    <div class="hero-content">
+                        <h1>Elegant Dining Sets</h1>
+                        <p>Perfect for family gatherings and special occasions.</p>
+                        <a href="products.html?category=tables" class="cta-button">Explore Tables</a>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070&auto=format&fit=crop');">
+                    <div class="hero-content">
+                        <h1>Luxury Bedroom Collection</h1>
+                        <p>Transform your bedroom into a sanctuary of comfort.</p>
+                        <a href="products.html?category=beds" class="cta-button">View Beds</a>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="carousel-btn prev" aria-label="Previous Slide">&#10094;</button>
+            <button class="carousel-btn next" aria-label="Next Slide">&#10095;</button>
+            
+            <div class="carousel-indicators">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </section>
+
+        <!-- CATEGORIES SECTION -->
+        <section class="category-section">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <a href="products.html?category=sofas" class="category-card">
+                    <img src="https://images.unsplash.com/photo-1540574163024-5884b2b504d3?q=80&w=2070" alt="Sofas">
+                    <h3>Sofas</h3>
+                </a>
+                <a href="products.html?category=beds" class="category-card">
+                    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2070" alt="Beds">
+                    <h3>Beds</h3>
+                </a>
+                <a href="products.html?category=tables" class="category-card">
+                    <img src="https://images.unsplash.com/photo-1577140917170-285929fb55b7?q=80&w=2070" alt="Tables">
+                    <h3>Tables</h3>
+                </a>
+                <a href="products.html?category=chairs" class="category-card">
+                    <img src="https://images.unsplash.com/photo-1592078615290-033ee584e267?q=80&w=1964" alt="Chairs">
+                    <h3>Chairs</h3>
+                </a>
+                <a href="products.html?category=storage" class="category-card">
+                    <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1974" alt="Storage">
+                    <h3>Storage</h3>
+                </a>
+                <a href="products.html?category=tv-panels" class="category-card">
+                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1974" alt="TV Panels">
+                    <h3>TV Panels</h3>
+                </a>
+            </div>
+        </section>
+
+        <!-- BESTSELLERS SECTION -->
+        <section class="bestsellers-section">
+            <div class="section-header">
+                <h2 class="section-title">Our Best Sellers</h2>
+                <a href="products.html?type=bestsellers" class="view-all-btn">View All</a>
+            </div>
+            
+            <div class="bestsellers-container">
+                <button class="slider-btn prev-btn" aria-label="Previous Products"><i class="material-icons">chevron_left</i></button>
+                <div class="bestsellers-grid" id="bestsellers-grid">
+                    <p class="loading-text" style="text-align:center; width:100%; color:#666;">Loading bestsellers...</p>
+                </div>
+                <button class="slider-btn next-btn" aria-label="Next Products"><i class="material-icons">chevron_right</i></button>
+            </div>
+        </section>
+
+        <!-- LATEST PRODUCTS SECTION -->
+        <section class="latest-products-section">
+            <div class="section-header">
+                <h2 class="section-title">Latest Arrivals</h2>
+                <!-- UPDATED LINK HERE -->
+                <a href="products.html?type=latest" class="view-all-btn">View All</a>
+            </div>
+            <div class="latest-products-container">
+                <div class="latest-products-grid" id="latest-products-grid">
+                    <p class="loading-text" style="text-align:center; width:100%; color:#666;">Loading latest products...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY US SECTION -->
+        <section id="why-us" class="why-us-section">
+            <h2 class="section-title">Why Choose Us?</h2>
+            <div class="why-us-grid">
+                <div class="why-us-card">
+                    <i class="material-icons">local_shipping</i>
+                    <h3>Safe & Fast Delivery</h3>
+                    <p>We provide safe and fast delivery service all over West Bengal and Sikkim.</p>
+                </div>
+                <div class="why-us-card">
+                    <i class="material-icons">create</i>
+                    <h3>Customized Furniture</h3>
+                    <p>We take orders for customized furnitures to match your exact needs.</p>
+                </div>
+                <div class="why-us-card">
+                    <i class="material-icons">store</i>
+                    <h3>Factory to Customer</h3>
+                    <p>Direct from factory to your doorstep, ensuring the best prices.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER STRUCTURE -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column footer-about">
+                <h3 id="footerName" class="shop-name-text"></h3>
+                <p>We customize premium quality furniture as per your needs. Bringing comfort and style to your home since 2025.</p>
+                <div class="social-links">
+                    <a id="fb_url" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a id="yt_url" href=""><i class="fab fa-youtube"></i></a>
+                    <a id="wa_url" href="" class="wa-link-dynamic"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">All Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="material-icons">location_on</i> <span class="shop-address-text"></span></p>
+                <p><i class="material-icons">phone</i> <span class="shop-phone-text"></span></p>
+                <p><i class="material-icons">email</i> <span class="shop-email-text"></span></p>
+                <p><i class="material-icons">access_time</i><span class="shop-time-text"></span></p>
+                
+                <a id="footer_mapurl" href="" target="_blank" class="get-directions-btn">
+                    Get Directions <i class="material-icons" style="font-size: 1rem; color: #000; vertical-align: middle;">near_me</i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; <span class="copyright_year"></span> <span class="copyright_name"></span>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Global FAB -->
+    <a href="#" class="whatsapp-fab wa-link-dynamic" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="js/data.js"></script>
+    <script type="module" src="js/common.js"></script>
+    <script type="module" src="js/home.js"></script>
+</body>
+</html>

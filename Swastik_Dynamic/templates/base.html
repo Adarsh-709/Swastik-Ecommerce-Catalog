@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Swastik Furnitures{% endblock %}</title>
+    
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- Block for page-specific CSS -->
+    {% block extra_css %}{% endblock %}
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    
+    <!-- --- HEADER (Common) --- -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ shop_settings.shop_logo }}" alt="Swastik Furnitures Logo">
+                    <span>{{ shop_settings.shop_name }}</span>
+                </a>
+            </div>
+            <div class="search-bar">
+                <form action="search.html" method="GET" class="search-form-container">
+                    <input type="text" name="q" placeholder="Search for products..." autocomplete="off">
+                    <button type="submit"><i class="material-icons">search</i></button>
+                    <div class="search-suggestions"></div>
+                </form>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                
+                <!-- DROPDOWN MENU FOR PRODUCTS -->
+                <li class="dropdown">
+                    <a href="{{ url_for('category_page') }}" class="dropbtn">Products <i class="material-icons" style="font-size: 1rem; vertical-align: middle;">arrow_drop_down</i></a>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('category_page', category='sofas') }}">Sofas</a>
+                        <a href="{{ url_for('category_page', category='beds') }}">Beds</a>
+                        <a href="{{ url_for('category_page', category='tables') }}">Tables</a>
+                        <a href="{{ url_for('category_page', category='chairs') }}">Chairs</a>
+                        <a href="{{ url_for('category_page', category='storage') }}">Storage</a>
+                        <a href="{{ url_for('category_page', category='tv-panels') }}">TV Panels</a>
+                        <a href="{{ url_for('category_page', category='kitchen') }}">Kitchen Items</a>
+                    </div>
+                </li>
+                
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About Us</a></li>
+                
+                <!-- Cart Link -->
+                <li>
+                    <a href="{{ url_for('cart_page') }}" class="cart-link">
+                        Cart <i class="material-icons" style="font-size: 1.2rem; vertical-align: middle;">shopping_cart</i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div id="search-icon">
+                <i class="material-icons">search</i>
+            </div>
+            <div class="hamburger">
+                <i class="material-icons">menu</i>
+            </div>
+        </nav>
+        <div class="search-container">
+            <form action="search.html" method="GET" class="search-form-container">
+                <input type="text" name="q" placeholder="Search for products..." autocomplete="off">
+                <button type="submit"><i class="material-icons">search</i></button>
+                <div class="search-suggestions"></div>
+            </form>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- UPDATED FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <!-- Column 1: About -->
+            <div class="footer-column footer-about">
+                <h3>{{ shop_settings.shop_name }}</h3>
+                <p>We customize premium quality furniture as per your needs. Bringing comfort and style to your home since 2025.</p>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <!-- Use shop_settings.phone for WhatsApp -->
+                    <a href="https://wa.me/{{ shop_settings.phone|replace(' ', '')|replace('+', '') }}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links (Add Us) -->
+            <div class="footer-column footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('category_page') }}">All Products</a></li>
+                    <li><a href="{{ url_for('about_page') }}">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="{{ url_for('cart_page') }}">My Cart</a></li>
+                    <!-- ADMIN LINK -->
+                    <li><a href="{{ url_for('admin_login') }}" class="admin-link"><i class="material-icons" style="font-size: 0.9rem; vertical-align: middle; margin-right: 5px;">admin_panel_settings</i>Admin Login</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Contact Info (DYNAMIC) -->
+            <div class="footer-column footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="material-icons">location_on</i> {{ shop_settings.address }}</p>
+                <p><i class="material-icons">phone</i> {{ shop_settings.phone }}</p>
+                <p><i class="material-icons">email</i> {{ shop_settings.email }}</p>
+                <p><i class="material-icons">access_time</i> Mon - Sat: 10:00 AM - 8:00 PM</p>
+                
+                <a href="{{ shop_settings.map_url }}" target="_blank" class="get-directions-btn">
+                    Get Directions <i class="material-icons" style="font-size: 1rem; vertical-align: middle;">near_me</i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 {{ shop_settings.shop_name }}. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Use shop_settings.phone for global FAB -->
+    <a href="https://wa.me/{{ shop_settings.phone|replace(' ', '')|replace('+', '') }}?text=Hello, I would like to inquire about your products." class="whatsapp-fab" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Common Scripts -->
+    <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/product-card.js') }}" type="module"></script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Swastik Furnitures</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f4b400;
+            --secondary: #2c3e50;
+            --bg: #f0f2f5;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(44, 62, 80, 0.1);
+            overflow: hidden;
+            padding: 5px;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        h2 { margin: 0 0 0.5rem; color: var(--secondary); font-size: 1.8rem; font-weight: 700; }
+        p.subtitle { color: #666; margin: 0 0 2rem; font-size: 0.95rem; }
+
+        .form-group { margin-bottom: 1.2rem; text-align: left; }
+        label { display: block; margin-bottom: 0.5rem; color: #444; font-weight: 500; font-size: 0.9rem; }
+        
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e1e4e8;
+            border-radius: 12px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.2s;
+            background: #f8fafc;
+        }
+        
+        input:focus {
+            border-color: var(--primary);
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(244, 180, 0, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-login:hover {
+            background: #1a252f;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(44, 62, 80, 0.15);
+        }
+
+        .btn-login:disabled { background: #95a5a6; cursor: wait; }
+
+        .alert {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: none;
+            border: 1px solid #fecaca;
+        }
+        
+        .footer-link {
+            display: block;
+            margin-top: 2rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-link:hover { color: var(--primary); }
+
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dwijp5leb/image/upload/v1769526254/Picsart_26-01-27_20-32-58-925_koa5xl.png" alt="Swastik Logo">
+        </div>
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Sign in to manage <b>Swastik Furnitures</b></p>
+
+        <div id="error-message" class="alert"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="email" required placeholder="admin@swastik.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn-login" id="loginBtn">Sign In</button>
+        </form>
+
+        <a href="{{ url_for('home') }}" class="footer-link">← Back to Website</a>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBU3E6cK-N5fVVK5L1Lp9IJE0SvzVQAkmE",
+            authDomain: "swastik-furniture.firebaseapp.com",
+            projectId: "swastik-furniture",
+            storageBucket: "swastik-furniture.firebasestorage.app",
+            messagingSenderId: "293615491612",
+            appId: "1:293615491612:web:d5dd37d3eaa3ab415a9dd9",
+            measurementId: "G-JEBYSF04KF"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        const loginForm = document.getElementById('loginForm');
+        const errorDiv = document.getElementById('error-message');
+        const loginBtn = document.getElementById('loginBtn');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorDiv.style.display = 'none';
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Verifying...';
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+                const idToken = await user.getIdToken();
+
+                const response = await fetch("{{ url_for('admin_login') }}", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id_token: idToken })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    window.location.href = "{{ url_for('admin_dashboard') }}";
+                } else {
+                    throw new Error(data.error || 'Login failed on server');
+                }
+            } catch (error) {
+                console.error(error);
+                errorDiv.textContent = "Invalid email or password.";
+                errorDiv.style.display = 'block';
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign In';
+            }
+        });
+    </script>
+</body>
+</html>

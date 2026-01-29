@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Swastik Furnitures{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1>About {{ shop_settings.shop_name }}</h1>
+            <p>Crafting quality furniture with a personal touch since 2025.</p>
+        </div>
+    </section>
+
+    <section class="our-story">
+        <div class="story-content">
+            <h2>Our Story</h2>
+            <p>Founded in 2025, {{ shop_settings.shop_name }} started with a simple idea: to create beautiful, high-quality furniture that is both stylish and affordable. We believe that everyone deserves to have a home they love, and we are passionate about helping our customers create their dream spaces.</p>
+            <p>We are a family-owned business based in Siliguri, West Bengal. We take pride in our craftsmanship and attention to detail. All of our furniture is made with the finest materials and is built to last. We are committed to providing our customers with the best possible service, and we are always happy to help with any questions or special requests.</p>
+        </div>
+        <div class="story-image">
+            <img src="{{ shop_settings.shop_logo }}" alt="Our Workshop">
+        </div>
+    </section>
+
+    <section class="our-location">
+        <h2 class="section-title">Our Location</h2>
+        <div class="location-content">
+            <div class="location-map">
+                <!-- Dynamic Map URL from Shop Settings -->
+                <iframe src="{{ shop_settings.map_url }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="location-address">
+                <h3>Visit Our Showroom</h3>
+                <p>{{ shop_settings.address }}</p>
+                <a href="{{ shop_settings.map_url }}" target="_blank" class="cta-button">Get Directions</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="why-us-section">
+        <h2 class="section-title">Our Values</h2>
+        <div class="why-us-grid">
+            <div class="why-us-card">
+                <i class="material-icons">check_circle</i>
+                <h3>Quality Craftsmanship</h3>
+                <p>We use only the finest materials and traditional woodworking techniques to ensure that our furniture is built to last.</p>
+            </div>
+            <div class="why-us-card">
+                <i class="material-icons">favorite</i>
+                <h3>Customer Satisfaction</h3>
+                <p>We are committed to providing our customers with the best possible service and ensuring that they are happy with their purchase.</p>
+            </div>
+            <div class="why-us-card">
+                <i class="material-icons">eco</i>
+                <h3>Sustainable Practices</h3>
+                <p>We are committed to using sustainable materials and practices to minimize our impact on the environment.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Swastik Furnitures</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/products.css"> <!-- Reusing product card styles -->
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img id ="shopLogo" style="font-size: 1.8rem;" src="" alt="Logo">
+                    <span id="shopName" class="shop-name-text"></span>
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <form onsubmit="handleSearch(event)">
+                    <input type="text" placeholder="Search for products..." autocomplete="off" value="">
+                    <button type="submit"><i class="material-icons">search</i></button>
+                </form>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="products.html" class="dropbtn">Products <i class="material-icons" style="font-size:1rem; margin-left:2px;">arrow_drop_down</i></a>
+                    <div class="dropdown-content">
+                        <a href="products.html?category=sofas">Sofas</a>
+                        <a href="products.html?category=beds">Beds</a>
+                        <a href="products.html?category=tables">Tables</a>
+                        <a href="products.html?category=chairs">Chairs</a>
+                        <a href="products.html?category=storage">Storage</a>
+                        <a href="products.html?category=tv-panels">TV Panels</a>
+                    </div>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li>
+                    <a href="cart.html">
+                        Cart <i class="material-icons" style="font-size:1.2rem;">shopping_bag</i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div id="search-icon"><i class="material-icons">search</i></div>
+            <div class="hamburger"><i class="material-icons">menu</i></div>
+        </nav>
+        
+        <div class="search-container">
+            <form onsubmit="handleSearch(event)">
+                <input type="text" placeholder="Search..." autocomplete="off">
+            </form>
+        </div>
+    </header>
+
+    <main class="search-page">
+        <div class="search-header-container">
+            <h1 id="search-title">Search Results</h1>
+            <p id="search-meta" class="search-meta"></p>
+        </div>
+
+        <div id="search-grid" class="product-grid">
+            <!-- Results will be injected here -->
+            <p class="loading-text" style="grid-column:1/-1; text-align:center;">Searching...</p>
+        </div>
+    </main>
+
+    <!-- FOOTER STRUCTURE -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column footer-about">
+                <h3 id="footerName" class="shop-name-text"></h3>
+                <p>We customize premium quality furniture as per your needs. Bringing comfort and style to your home since 2025.</p>
+                <div class="social-links">
+                    <a id="fb_url" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a id="yt_url" href=""><i class="fab fa-youtube"></i></a>
+                    <a id="wa_url" href="" class="wa-link-dynamic"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">All Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="material-icons">location_on</i> <span class="shop-address-text"></span></p>
+                <p><i class="material-icons">phone</i> <span class="shop-phone-text"></span></p>
+                <p><i class="material-icons">email</i> <span class="shop-email-text"></span></p>
+                <p><i class="material-icons">access_time</i><span class="shop-time-text"></span></p>
+                
+                <a id="footer_mapurl" href="" target="_blank" class="get-directions-btn">
+                    Get Directions <i class="material-icons" style="font-size: 1rem; color: #000; vertical-align: middle;">near_me</i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; <span class="copyright_year"></span> <span class="copyright_name"></span>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="whatsapp-fab wa-link-dynamic" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="js/data.js"></script>
+    <script type="module" src="js/common.js"></script>
+    <script type="module" src="js/products.js"></script> <!-- Reusing card creation logic helpers if available, or search.js -->
+    <script type="module" src="js/search.js"></script>
+</body>
+</html>

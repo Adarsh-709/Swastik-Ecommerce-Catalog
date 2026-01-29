@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart - Swastik Furnitures{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+{% endblock %}
+
+{% block content %}
+    <main class="cart-page">
+        <h1 class="cart-title">Your Shopping Cart</h1>
+        
+        <div id="cart-container" class="cart-container">
+            <!-- Cart Items will be injected here -->
+            <div id="cart-items" class="cart-items">
+                <!-- Javascript populates this -->
+            </div>
+
+            <!-- Cart Summary -->
+            <div id="cart-summary" class="cart-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-row">
+                    <span>Total Items:</span>
+                    <span id="total-items">0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Estimated Total:</span>
+                    <span id="total-price">₹0</span>
+                </div>
+                <button id="checkout-btn" data-phone="{{ shop_settings.phone|replace(' ', '')|replace('+', '') }}" class="checkout-btn">
+                    <i class="fab fa-whatsapp"></i> Order All on WhatsApp
+                </button>
+            </div>
+        </div>
+
+        <!-- Empty Cart State (Hidden by default) -->
+        <div id="empty-cart-message" class="empty-cart-message" style="display: none;">
+            <i class="material-icons">remove_shopping_cart</i>
+            <h2>Your cart is currently empty.</h2>
+            <a href="{{ url_for('category_page') }}" class="cta-button">Browse Products</a>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/cart.js') }}" type="module"></script>
+{% endblock %}

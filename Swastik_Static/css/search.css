@@ -1,0 +1,45 @@
+.search-page {
+    padding: 3rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 60vh;
+}
+
+.search-header-container {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#search-title {
+    font-family: var(--font-family-headings);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.search-meta {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Ensure grid matches products.css via class .product-grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+@media (max-width: 600px) {
+    .search-page {
+        padding: 2rem 1rem;
+    }
+    
+    #search-title {
+        font-size: 2rem;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Swastik Furnitures{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+{% endblock %}
+
+{% block content %}
+    <section class="search-results-section">
+        <h1 id="search-results-title">Search Results</h1>
+        <div id="search-results-grid" class="product-grid">
+            <p class="loading-text">Searching...</p>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/search.js') }}" type="module"></script>
+{% endblock %}
